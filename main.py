@@ -147,7 +147,7 @@ def upload_modrinth() -> bool:
                     "game_versions": [version.minecraft_version],
                     "version_type": config.VERSION_TYPE,
                     "loaders": loader.loader_tags,
-                    "featured": config.VERSION_TYPE == "release",
+                    "featured": config.FEATURED_VERSION,
                     "status": "listed",
                     "requested_status": "listed",
                     "project_id": config.MODRINTH_PROJECT_ID,

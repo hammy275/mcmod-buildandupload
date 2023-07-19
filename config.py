@@ -28,9 +28,9 @@ LOADERS: List[Loader] = [
                                     curseforge_project_slug="mc-vr-api")])
 ]
 # Version number for this mod release
-VERSION: str = "1.3.3"
+VERSION: str = "1.4.0-beta1"
 # Version type. Must be "release", "beta", or "alpha"
-VERSION_TYPE: str = "release"
+VERSION_TYPE: str = "beta"
 # Whether to publish to CurseForge
 PUBLISH_CURSEFORGE: bool = True
 # Whether to publish to Modrinth
@@ -39,6 +39,8 @@ PUBLISH_MODRINTH: bool = True
 PROJECT_PATH: str = "."
 # Path to changelog
 CHANGELOG_PATH: str = "changelog.md"
+# Whether the version should be featured on Modrinth
+FEATURED_VERSION = True
 
 # All versions to build your mod for.
 # branch_name is the name of the Git branch and minecraft_version is the Minecraft version this
@@ -48,6 +50,7 @@ BUILD_VERSIONS: List[Version] = [
     Version(branch_name="1.19.x", minecraft_version="1.19.2"),
     Version(branch_name="1.19.3", minecraft_version="1.19.3"),
     Version(branch_name="1.19.4", minecraft_version="1.19.4"),
+    Version(branch_name="1.20.x", minecraft_version="1.20.1"),
 ]
 
 # Project ID for Modrinth uploads
