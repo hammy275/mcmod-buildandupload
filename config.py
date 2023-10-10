@@ -39,8 +39,9 @@ PUBLISH_MODRINTH: bool = True
 PROJECT_PATH: str = "."
 # Path to changelog
 CHANGELOG_PATH: str = "changelog.md"
-# Whether the version should be featured on Modrinth
-FEATURED_VERSION = True
+# Whether the version should be featured on Modrinth. If no featured versions are set, Modrinth determines
+# the featured versions automatically.
+FEATURED_VERSION = False
 
 # All versions to build your mod for.
 # branch_name is the name of the Git branch and minecraft_version is the Minecraft version this
