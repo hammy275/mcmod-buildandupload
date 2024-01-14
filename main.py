@@ -56,6 +56,9 @@ def upload_curseforge() -> bool:
     os.chdir(config.BUILDS_DIR)
     for version in config.BUILD_VERSIONS:
         for loader in config.LOADERS:
+            # Skip if we don't build for this loader
+            if loader.minecraft_versions is not None and version.minecraft_version not in loader.minecraft_versions:
+                continue
             # Get version ID from Minecraft version
             major_minor_patch = version.minecraft_version.split(".")
             version_name = "Minecraft " + ".".join([major_minor_patch[0], major_minor_patch[1]])
@@ -132,6 +135,10 @@ def upload_modrinth() -> bool:
     os.chdir(config.BUILDS_DIR)
     for version in config.BUILD_VERSIONS:
         for loader in config.LOADERS:
+            # Skip if we don't build for this loader
+            if loader.minecraft_versions is not None and version.minecraft_version not in loader.minecraft_versions:
+                continue
+
             fil = get_file_to_upload(version, loader)
 
             with open(fil, "rb") as file_data:
@@ -186,8 +193,12 @@ def do_builds() -> bool:
             os.chdir(config.PROJECT_PATH)
             run([config.GIT_PATH, "checkout", build_config.branch_name], check=True)
 
-            # Wipe old builds
+            # Wipe old builds.
             for loader in config.LOADERS:
+                # Skip if we don't build for this loader
+                if loader.minecraft_versions is not None and build_config.minecraft_version not in loader.minecraft_versions:
+                    continue
+                
                 try:
                     shutil.rmtree(os.path.join(config.PROJECT_PATH, loader.folder_name, "build", "libs"))
                 except FileNotFoundError:
@@ -198,6 +209,9 @@ def do_builds() -> bool:
 
             # Move built JARs to temporary working directory
             for loader in config.LOADERS:
+                # Skip if we don't build for this loader
+                if loader.minecraft_versions is not None and build_config.minecraft_version not in loader.minecraft_versions:
+                    continue
                 os.chdir(os.path.join(config.PROJECT_PATH, loader.folder_name, "build", "libs"))
                 files = [fil for fil in os.listdir() if "dev-shadow" not in fil and "sources" not in fil]
                 if len(files) == 0:
