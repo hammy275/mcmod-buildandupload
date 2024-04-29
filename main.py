@@ -205,7 +205,10 @@ def do_builds() -> bool:
                     pass
 
             # Build JARs
-            run([gradle_exec, "build"], check=True)
+            environ = os.environ.copy()
+            if build_config.java_home is not None:
+                environ["JAVA_HOME"] = build_config.java_home
+            run([gradle_exec, "build"], check=True, env=environ)
 
             # Move built JARs to temporary working directory
             for loader in config.LOADERS:
@@ -248,6 +251,10 @@ def validate_config() -> str:
 
     if config.VERSION_TYPE not in ["release", "beta", "alpha"]:
         return "VERSION_TYPE must be 'release', 'beta', or 'alpha'!"
+
+    for build_config in config.BUILD_VERSIONS:
+        if build_config.java_home is not None and not os.path.isdir(build_config.java_home):
+            return "{} points to a JAVA_HOME that could not be found!".format(build_config)
 
     return ""
 

@@ -42,16 +42,18 @@ CHANGELOG_PATH: str = "changelog.md"
 FEATURED_VERSION = False
 
 # All versions to build your mod for.
-# branch_name is the name of the Git branch and minecraft_version is the Minecraft version this
-# should be published under.
+# branch_name is the name of the Git branch, minecraft_version is the Minecraft version this
+# should be published under, and java_home is a path to the JAVA_HOME to use when building this version, or None
+# to leave determining the JDK path up to gradle.
 BUILD_VERSIONS: List[Version] = [
-    Version(branch_name="1.18.x-multiloader", minecraft_version="1.18.2"),
-    Version(branch_name="1.19.x", minecraft_version="1.19.2"),
-    Version(branch_name="1.19.3", minecraft_version="1.19.3"),
-    Version(branch_name="1.19.4", minecraft_version="1.19.4"),
-    Version(branch_name="1.20.x", minecraft_version="1.20.1"),
-    Version(branch_name="1.20.2", minecraft_version="1.20.2"),
-    Version(branch_name="1.20.4", minecraft_version="1.20.4")
+    Version(branch_name="1.18.x-multiloader", minecraft_version="1.18.2", java_home=None),
+    Version(branch_name="1.19.x", minecraft_version="1.19.2", java_home=None),
+    Version(branch_name="1.19.3", minecraft_version="1.19.3", java_home=None),
+    Version(branch_name="1.19.4", minecraft_version="1.19.4", java_home=None),
+    Version(branch_name="1.20.x", minecraft_version="1.20.1", java_home=None),
+    Version(branch_name="1.20.2", minecraft_version="1.20.2", java_home=None),
+    Version(branch_name="1.20.4", minecraft_version="1.20.4", java_home=None),
+    Version(branch_name="1.20.5", minecraft_version="1.20.5", java_home="~\\.jdks\\temurin-21.0.3")
 ]
 
 # Project ID for Modrinth uploads
@@ -83,6 +85,10 @@ PROJECT_PATH = path.expanduser(path.expandvars(PROJECT_PATH))
 
 # Expand CHANGELOG_PATH variables
 CHANGELOG_PATH = path.expanduser(path.expandvars(CHANGELOG_PATH))
+
+# Expand java_home variables in BUILD_VERSIONS that aren't None
+for version in BUILD_VERSIONS:
+    version.java_home = path.expanduser(path.expandvars(version.java_home)) if version.java_home is not None else None
 
 # Create temp directory for work
 BUILDS_DIR = tempfile.mkdtemp()
