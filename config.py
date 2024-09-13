@@ -16,17 +16,15 @@ from VersionClass import Version
 # (required, optional, incompatible, or embedded)
 LOADERS: List[Loader] = [
     Loader(folder_name="fabric", loader_tags=["fabric", "quilt"],
-           dependencies=[Dependency(modrinth_project_id="lhGA9TYQ", dependency_type="required",
-                                    curseforge_project_slug="architectury-api")], minecraft_versions=None),
+           dependencies=[Dependency(modrinth_project_id="P7dR8mSH", dependency_type="required",
+                                    curseforge_project_slug="fabric-api")], minecraft_versions=None),
     Loader(folder_name="forge", loader_tags=["forge"],
-           dependencies=[Dependency(modrinth_project_id="lhGA9TYQ", dependency_type="required",
-                                    curseforge_project_slug="architectury-api")], minecraft_versions=None),
+           dependencies=[], minecraft_versions=None),
     Loader(folder_name="neoforge", loader_tags=["neoforge"],
-           dependencies=[Dependency(modrinth_project_id="lhGA9TYQ", dependency_type="required",
-                                    curseforge_project_slug="architectury-api")], minecraft_versions=["1.20.2", "1.20.4"]),                                
+           dependencies=[], minecraft_versions=["1.20.2", "1.20.4", "1.20.6", "1.21.1"]),                                
 ]
 # Version number for this mod release
-VERSION: str = "3.0.7"
+VERSION: str = "3.0.10"
 # Version type. Must be "release", "beta", or "alpha"
 VERSION_TYPE: str = "release"
 # Whether to publish to CurseForge
@@ -53,7 +51,8 @@ BUILD_VERSIONS: List[Version] = [
     Version(branch_name="1.20.x", minecraft_version="1.20.1", java_home=None),
     Version(branch_name="1.20.2", minecraft_version="1.20.2", java_home=None),
     Version(branch_name="1.20.4", minecraft_version="1.20.4", java_home=None),
-    Version(branch_name="1.20.5", minecraft_version="1.20.5", java_home="~\\.jdks\\temurin-21.0.3")
+    Version(branch_name="1.20.6", minecraft_version="1.20.6", java_home="C:\Program Files\Eclipse Adoptium\jdk-21.0.4.7-hotspot"),
+    Version(branch_name="1.21.1", minecraft_version="1.21.1", java_home="C:\Program Files\Eclipse Adoptium\jdk-21.0.4.7-hotspot"),
 ]
 
 # Project ID for Modrinth uploads

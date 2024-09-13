@@ -102,11 +102,11 @@ def upload_curseforge() -> bool:
                                                                      loader=loader.folder_name.upper(),
                                                                      mc_version=version.minecraft_version),
                     "gameVersions": [version_id] + modloader_ids,
-                    "releaseType": config.VERSION_TYPE,
-                    "relations": {
-                        "projects": [d.to_curseforge_dict() for d in loader.dependencies]
-                    }
+                    "releaseType": config.VERSION_TYPE
                 }
+
+                if len(loader.dependencies) > 0:
+                    payload["relations"] = {"projects": [d.to_curseforge_dict() for d in loader.dependencies]}
 
                 r = requests.post("https://minecraft.curseforge.com/api/projects/{}/upload-file"
                                   .format(config.CURSEFORGE_PROJECT_ID),
