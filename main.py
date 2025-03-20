@@ -192,6 +192,7 @@ def do_builds() -> bool:
             # Move directory and checkout branch
             os.chdir(config.PROJECT_PATH)
             run([config.GIT_PATH, "checkout", build_config.branch_name], check=True)
+            run([config.GIT_PATH, "pull"], check=True)
 
             # Wipe old builds.
             for loader in config.LOADERS:
