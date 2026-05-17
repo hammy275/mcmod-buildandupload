@@ -217,7 +217,7 @@ def do_builds() -> bool:
                 if loader.minecraft_versions is not None and build_config.minecraft_version not in loader.minecraft_versions:
                     continue
                 os.chdir(os.path.join(config.PROJECT_PATH, loader.folder_name, "build", "libs"))
-                files = [fil for fil in os.listdir() if "dev-shadow" not in fil and "sources" not in fil]
+                files = [fil for fil in os.listdir() if "dev-shadow" not in fil and "sources" not in fil and "javadoc" not in fil]
                 if len(files) == 0:
                     log("Could not find build JAR! Here are all of the files in the build/libs directory:")
                     for f in os.listdir():
