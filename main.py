@@ -61,14 +61,14 @@ def upload_curseforge() -> bool:
                 continue
             # Get version ID from Minecraft version
             major_minor_patch = version.minecraft_version.split(".")
-            version_name = "Minecraft " + ".".join([major_minor_patch[0], major_minor_patch[1]])
+            version_names = ["Minecraft " + ".".join([major_minor_patch[0], major_minor_patch[1]]), ".".join([major_minor_patch[0], major_minor_patch[1]])]
             major_version_id = None
             for m in major_versions:
-                if "name" in m and m["name"] == version_name:
+                if "name" in m and m["name"] in version_names:
                     major_version_id = m["id"]
                     break
             if major_version_id is None:
-                log("Could not get major version ID for Minecraft major version {}".format(version_name))
+                log("Could not get major version ID for Minecraft major version {}".format(".".join([major_minor_patch[0], major_minor_patch[1]])))
                 return False
 
             version_id = None
