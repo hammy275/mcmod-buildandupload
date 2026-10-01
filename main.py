@@ -102,6 +102,7 @@ def upload_curseforge() -> bool:
                                                                      loader=loader.folder_name.upper(),
                                                                      mc_version=version.minecraft_version),
                     "gameVersions": [version_id] + modloader_ids,
+                    "gameVersionNames": ["Client", "Server"],  # Tells CurseForge the mod is for both client and server sides. TODO: Make this customizable
                     "releaseType": config.VERSION_TYPE
                 }
 
